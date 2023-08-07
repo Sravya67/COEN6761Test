@@ -1,0 +1,5 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+testing,com.example.testing.fun,Current,0,166,0,10,0,37,0,18,0,13
+testing,com.example.testing.fun,Control,254,275,33,39,45,77,23,28,0,11
+testing,com.example.testing.fun,Current.facing,0,27,0,0,0,5,0,1,0,1
+testing,com.example.testing,TestingApplication,59,0,6,0,18,0,5,0,2,0

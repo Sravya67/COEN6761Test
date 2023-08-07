@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Current.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.example.testing in Testing-main Coverage Results</a> &gt; <a href="index.source.html" class="el_package">com.example.testing.fun</a> &gt; <span class="el_source">Current.java</span></div><h1>Current.java</h1><pre class="source lang-java linenums">package com.example.testing.fun;
+
+import java.util.Arrays;
+
+public class Current {
+    public static Current.facing facing;
+    private int[][] floor;
+    private int cX;
+    private int cY;
+    private boolean Pen;
+    private facing currentFace;
+    private int rot;
+
+<span class="fc" id="L14">    public Current(int n) {</span>
+//        System.out.println(n);
+<span class="fc" id="L16">        floor = new int[n][n];</span>
+<span class="fc" id="L17">        currentFace  = facing.NORTH;</span>
+<span class="fc" id="L18">        cX  = 0;</span>
+<span class="fc" id="L19">        cY = 0;</span>
+<span class="fc" id="L20">        Pen = false;</span>
+<span class="fc" id="L21">        rot =0;</span>
+<span class="fc" id="L22">    }</span>
+
+    public int[][] getFloor() {
+<span class="fc" id="L25">        return floor;</span>
+    }
+    
+    
+    public char[][] printFloor() {
+<span class="fc" id="L30">        int size = floor.length;</span>
+<span class="fc" id="L31">        char[][] print = new char[size][size];</span>
+
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            for (int j = 0; j &lt; size; j++) {</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">            	if(floor[j][size-i-1]==1)</span>
+                
+<span class="fc" id="L37">                print[i][j]= '*';</span>
+            	else {
+<span class="fc" id="L39">            		print[i][j]= '0';</span>
+            	}
+            }
+            
+
+        }
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">            for (int j = 0; j &lt; size; j++) {</span>
+<span class="fc" id="L47">            	System.out.print(print[i][j]+&quot; &quot;);</span>
+            }
+<span class="fc" id="L49">        System.out.println();</span>
+        }
+
+<span class="fc" id="L52">        return print;</span>
+    }
+    public void setFloor(int[][] floor) {
+<span class="fc" id="L55">        this.floor = floor;</span>
+<span class="fc" id="L56">    }</span>
+
+    public int getcX() {
+<span class="fc" id="L59">        return cX;</span>
+    }
+
+    public void setcX(int cX) {
+<span class="fc" id="L63">        this.cX = cX;</span>
+<span class="fc" id="L64">    }</span>
+
+    public int getcY() {
+<span class="fc" id="L67">        return cY;</span>
+    }
+
+    public void setcY(int cY) {
+<span class="fc" id="L71">        this.cY = cY;</span>
+<span class="fc" id="L72">    }</span>
+
+    public boolean isPen() {
+<span class="fc" id="L75">        return Pen;</span>
+    }
+
+    public void setPen(boolean pen) {
+<span class="fc" id="L79">        Pen = pen;</span>
+<span class="fc" id="L80">    }</span>
+
+//    public facing getCurrentFace() {
+//        return currentFace;
+//    }
+//
+//    public void setCurrentFace(facing currentFace) {
+//        this.currentFace = currentFace;
+//    }
+<span class="fc" id="L89">    public String[] array = {&quot;North&quot;, &quot;East&quot;, &quot;South&quot;, &quot;West&quot;};</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L93">        return &quot;Current{&quot; +</span>
+                &quot;cX=&quot; + cX +
+                &quot;, cY=&quot; + cY +
+                &quot;, Pen=&quot; + Pen +
+                &quot;, currentFace=&quot; + array[rot] +
+                '}';
+    }
+
+    public int getRot() {
+<span class="fc" id="L102">        return rot;</span>
+    }
+
+    public void setRot(int rot) {
+<span class="fc" id="L106">        this.rot = rot;</span>
+<span class="fc" id="L107">    }</span>
+
+<span class="fc" id="L109">    public enum facing {</span>
+<span class="fc" id="L110">        NORTH,</span>
+<span class="fc" id="L111">        EAST,</span>
+<span class="fc" id="L112">        SOUTH,</span>
+<span class="fc" id="L113">        WEST</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Control.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">testing</a> &gt; <a href="index.source.html" class="el_package">com.example.testing.fun</a> &gt; <span class="el_source">Control.java</span></div><h1>Control.java</h1><pre class="source lang-java linenums">package com.example.testing.fun;
+
+<span class="fc" id="L3">public class Control {</span>
+
+    public Current current;
+
+
+    public void setBoard(int n) {
+<span class="fc" id="L9">        current = new Current(n);</span>
+<span class="fc" id="L10">    }</span>
+
+
+    public void commandCenter(String command) {
+//        System.out.println(command);
+
+<span class="fc" id="L16">        char action = command.toUpperCase().charAt(0);</span>
+<span class="pc bpc" id="L17" title="1 of 6 branches missed.">        if (command.length() != 1 &amp;&amp; action!= 'M' &amp;&amp; action!= 'I' ) //R3</span>
+        {
+<span class="nc" id="L19">            System.out.println(&quot;Invalid command format!&quot; );</span>
+<span class="nc" id="L20">            return;</span>
+
+        }
+
+<span class="pc bpc" id="L24" title="2 of 10 branches missed.">        switch (action) {</span>
+            case 'L': //R2
+<span class="fc" id="L26">                left();</span>
+
+<span class="fc" id="L28">                break;</span>
+            case 'R': //R2
+<span class="fc" id="L30">                right();</span>
+<span class="fc" id="L31">                break;</span>
+            case 'U': //R2
+<span class="fc" id="L33">                up();</span>
+
+<span class="fc" id="L35">                break;</span>
+            case 'D': //R2
+<span class="fc" id="L37">                down();</span>
+<span class="fc" id="L38">                break;</span>
+            case 'M': // R1
+<span class="fc" id="L40">                int spaces = parseSpaces(command);</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">                if (spaces == -1){</span>
+<span class="nc" id="L42">                    System.out.println(&quot;Invalid command format!&quot;);</span>
+
+                }
+                else
+<span class="fc" id="L46">                    move(spaces);</span>
+<span class="fc" id="L47">                break;</span>
+            case 'P': //R4
+<span class="fc" id="L49">            	current.printFloor();</span>
+<span class="fc" id="L50">                break;</span>
+            case 'C':
+<span class="fc" id="L52">                System.out.println(current.toString());</span>
+<span class="fc" id="L53">                break;</span>
+            case 'Q':
+<span class="nc" id="L55">                System.out.println(&quot;Stopping the program...&quot;);</span>
+<span class="nc" id="L56">                System.exit(0);</span>
+<span class="nc" id="L57">                break;</span>
+            case 'I':
+<span class="fc" id="L59">                int size = parseSize(command);</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">                if (size==-1) {</span>
+<span class="fc" id="L61">                    System.out.println(&quot;Invalid command format!&quot;);</span>
+<span class="fc" id="L62">                    break;</span>
+                 }
+                else
+<span class="fc" id="L65">                    init(size);</span>
+<span class="fc" id="L66">                break;</span>
+            default: //R3
+<span class="nc" id="L68">                System.out.println(new IllegalArgumentException(&quot;Invalid input&quot;).toString());</span>
+                
+        }
+
+<span class="fc" id="L72">    }</span>
+    public int parseSize(String command) {
+<span class="fc" id="L74">        int size = 0;</span>
+<span class="pc bpc" id="L75" title="1 of 4 branches missed.">        if (command.length() &lt; 3 ||  command.charAt(1)!=' ') {</span>
+<span class="fc" id="L76">            return -1;</span>
+        }
+        try {
+<span class="fc" id="L79">            size = Integer.parseInt(command.substring(2));</span>
+<span class="fc" id="L80">        } catch (NumberFormatException e) {</span>
+<span class="fc" id="L81">            return -1;</span>
+<span class="fc" id="L82">        }</span>
+<span class="fc" id="L83">        return size;</span>
+    }
+    public int parseSpaces(String command) {
+<span class="fc" id="L86">        int spaces = 0;</span>
+<span class="pc bpc" id="L87" title="1 of 4 branches missed.">        if (command.length() &lt; 3 ||  command.charAt(1)!=' ') {</span>
+<span class="fc" id="L88">            return -1;</span>
+        }
+        try {
+<span class="fc" id="L91">            spaces = Integer.parseInt(command.substring(2));</span>
+<span class="fc" id="L92">        } catch (NumberFormatException e) {</span>
+<span class="fc" id="L93">           return -1;</span>
+<span class="fc" id="L94">        }</span>
+<span class="fc" id="L95">        return spaces;</span>
+    }
+    
+    private void move(int spaces)  {  //R1
+    	
+    	    //North
+<span class="fc bfc" id="L101" title="All 2 branches covered.">    	    if(current.getRot()==0) {</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">    	    	if(current.getcY()+spaces&gt;= current.getFloor().length) {</span>
+<span class="fc" id="L103">                    System.out.println(new IndexOutOfBoundsException(&quot;Out of bounds error&quot;).toString());</span>
+    	    	   }
+    	    	else{
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">    	    		if(current.isPen()==true) {	</span>
+<span class="nc" id="L107">    	    			int[][] newfloor = current.getFloor();</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">    	    			for(int i=0;i&lt;=spaces;i++) {</span>
+<span class="nc" id="L109">    	    			newfloor[current.getcX()][current.getcY()+i]=1;</span>
+    	    			}
+<span class="nc" id="L111">    	    			current.setFloor(newfloor);</span>
+<span class="nc" id="L112">    	    			current.setcY(current.getcY()+spaces);	</span>
+<span class="nc" id="L113">    	    		    }</span>
+    	    		else {
+<span class="fc" id="L115">    	                current.setcY(current.getcY()+spaces);</span>
+    	    	}
+    	    }	
+}
+    	    //East
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">    	    else if(current.getRot()==1) {</span>
+    	    	
+<span class="nc bnc" id="L122" title="All 2 branches missed.">    	    	if(current.getcX()+spaces&gt;=current.getFloor().length) {</span>
+<span class="nc" id="L123">                    System.out.println(new IndexOutOfBoundsException(&quot;Out of bounds error&quot;).toString());</span>
+
+    	    	}
+    	    	else {	
+<span class="nc bnc" id="L127" title="All 2 branches missed.">    	    		if(current.isPen()) {</span>
+<span class="nc" id="L128">    	    			int[][] newfloor = current.getFloor();</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">    	    			for(int i=0;i&lt;=spaces;i++) {</span>
+<span class="nc" id="L130">    	    			newfloor[current.getcX()+i][current.getcY()]=1;</span>
+    	    			}
+<span class="nc" id="L132">    	    			current.setFloor(newfloor);</span>
+<span class="nc" id="L133">    	    			current.setcX(current.getcX()+spaces);	</span>
+<span class="nc" id="L134">    	    		    }</span>
+    	    		else {
+<span class="nc" id="L136">    	                current.setcX(current.getcX()+spaces);</span>
+    	    	}
+    	    }	
+}
+    	    //South
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">    	    else if(current.getRot()==2) {  	</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">    	    	if(current.getcY()-spaces&lt;0) {</span>
+<span class="fc" id="L143">                    System.out.println(new IndexOutOfBoundsException(&quot;Out of bounds error&quot;).toString());</span>
+
+    	    	}
+    	    	else {
+<span class="nc bnc" id="L147" title="All 2 branches missed.">	    		    if(current.isPen()) {</span>
+<span class="nc" id="L148">    	    			int[][] newfloor = current.getFloor();</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">    	    			for(int i=0;i&lt;=spaces;i++) {</span>
+<span class="nc" id="L150">    	    			newfloor[current.getcX()][current.getcY()-i]=1;</span>
+    	    			}
+<span class="nc" id="L152">    	    			current.setFloor(newfloor);</span>
+<span class="nc" id="L153">    	    			current.setcY(current.getcY()-spaces);	</span>
+<span class="nc" id="L154">    	    		    }</span>
+    	    		else {
+<span class="nc" id="L156">    	                current.setcY(current.getcY()-spaces);</span>
+    	    	}
+    	    }	
+}
+    	    //West
+<span class="nc bnc" id="L161" title="All 2 branches missed.">    	    else if(current.getRot()==3) {</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">    	    	if(current.getcX()-spaces&lt;0) {</span>
+<span class="nc" id="L163">                    System.out.println(new IndexOutOfBoundsException(&quot;Out of bounds error&quot;).toString());</span>
+
+    	    	}
+    	    	else {
+    	    		
+<span class="nc bnc" id="L168" title="All 2 branches missed.">    	    		if(current.isPen()) {</span>
+<span class="nc" id="L169">    	    			int[][] newfloor = current.getFloor();</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">    	    			for(int i=0;i&lt;=spaces;i++) {</span>
+<span class="nc" id="L171">    	    			newfloor[current.getcX()-i][current.getcY()]=1;</span>
+    	    			}
+<span class="nc" id="L173">    	    			current.setFloor(newfloor);</span>
+<span class="nc" id="L174">    	    			current.setcX(current.getcX()-spaces);	</span>
+<span class="nc" id="L175">    	    		    }</span>
+    	    		else {
+<span class="nc" id="L177">    	                current.setcX(current.getcX()-spaces);</span>
+    	    	}
+    	    }	
+<span class="fc" id="L180">}}</span>
+
+
+
+
+    private void right() { //R2
+
+<span class="fc bfc" id="L187" title="All 2 branches covered.">        if (current.getRot() == 0) {</span>
+<span class="fc" id="L188">            current.setRot(1);</span>
+
+        }
+<span class="fc bfc" id="L191" title="All 2 branches covered.">        else if (current.getRot() == 1) {</span>
+<span class="fc" id="L192">            current.setRot(2);</span>
+        }
+<span class="fc bfc" id="L194" title="All 2 branches covered.">        else if (current.getRot() == 2) {</span>
+<span class="fc" id="L195">            current.setRot(3);</span>
+        }
+        else {
+<span class="fc" id="L198">            current.setRot(0);</span>
+        }
+
+
+<span class="fc" id="L202">    }</span>
+
+    private void init(int n) {
+<span class="fc" id="L205">        current = new Current(n);</span>
+<span class="fc" id="L206">    }</span>
+
+    private void left() { //R2
+<span class="pc bpc" id="L209" title="1 of 2 branches missed.">        if (current.getRot() == 0) {</span>
+<span class="nc" id="L210">            current.setRot(3);</span>
+        }
+<span class="pc bpc" id="L212" title="1 of 2 branches missed.">        else if (current.getRot() == 1) {</span>
+<span class="nc" id="L213">            current.setRot(0);</span>
+        }
+<span class="pc bpc" id="L215" title="1 of 2 branches missed.">        else if (current.getRot() == 2) {</span>
+<span class="fc" id="L216">            current.setRot(1);</span>
+        }
+        else {
+<span class="nc" id="L219">            current.setRot(2);</span>
+        }
+<span class="fc" id="L221">    }</span>
+
+    private void up() { //R2
+<span class="fc" id="L224">        current.setPen(false);</span>
+<span class="fc" id="L225">    }</span>
+
+    private void down() { //R2
+<span class="fc" id="L228">        current.setPen(true);</span>
+        int[][] newfloor;
+<span class="fc" id="L230">        newfloor=current.getFloor();</span>
+<span class="fc" id="L231">        newfloor[current.getcX()][current.getcY()]=1;</span>
+<span class="fc" id="L232">        current.setFloor(newfloor);</span>
+    
+<span class="fc" id="L234">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
